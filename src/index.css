@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  overflow-y: scroll;
 }
 
 *, ::before, ::after {
@@ -48,50 +49,62 @@ body {
 
 
 
-.search {
+.discover {
   display: flex;
   justify-content: flex-end;
   padding: 0 10px;
   margin-bottom: 20px;
 }
 
-.search input {
-  width: 200px;
-  padding: 10px 20px;
-  border: none;
-  box-shadow: 0 0 1px 0px #51707F;
-  transition: .2s all;
-}
+  .discover__sort {
+    display: flex;
+    margin-right: auto;
+  }
 
-.search input:focus {
-  width: 400px;
-  box-shadow: 0 0 10px 0px #51707F;
-}
+  .discover__sort button {
+    width: 120px;
+    margin-right: 10px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    color: #fff;
+    border: none;
+    background-color: #537383;
+  }
 
-.search input::placeholder {
-  text-transform: uppercase;
-  color: #51707F;
-}
+  .discover__sort button:hover {
+    box-shadow: 0 0 10px 0px #51707F;
+  }
 
-.search__sort {
-  margin-right: auto;
-}
+  .discover__search {
+    width: 200px;
+    padding: 10px 20px;
+    border: none;
+    box-shadow: 0 0 1px 0px #51707F;
+    transition: .2s all;
+  }
 
-.search__sort button {
-  width: 100px;
-  margin-right: 10px;
-  padding: 10px 20px;
-  text-transform: uppercase;
-  color: #fff;
-  border: none;
-  background-color: #537383;
-}
+  .discover__search:focus {
+    width: 400px;
+    box-shadow: 0 0 10px 0px #51707F;
+  }
 
-.search__sort button:hover {
-  box-shadow: 0 0 10px 0px #51707F;
-}
+  .discover__search::placeholder {
+    text-transform: uppercase;
+    color: #51707F;
+  }
 
+  .drop-genres {
+    position: relative;
+    width: 120px;
+    height: 35px;
+  }
 
+    .drop-genres ul {
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      list-style: none;
+    }
 
 
 
@@ -222,13 +235,6 @@ body {
   .sk-wave .sk-rect5 {
     -webkit-animation-delay: -0.8s;
             animation-delay: -0.8s; }
-@-webkit-keyframes sk-waveStretchDelay {
-  0%, 40%, 100% {
-    -webkit-transform: scaleY(0.4);
-            transform: scaleY(0.4); }
-  20% {
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1); } }
 @keyframes sk-waveStretchDelay {
   0%, 40%, 100% {
     -webkit-transform: scaleY(0.4);

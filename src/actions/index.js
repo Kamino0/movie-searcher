@@ -4,10 +4,11 @@ import {
   API_KEY,
   URL,
   DISCOVER_URL,
-  SEARCH_URL
+  SEARCH_URL,
+  VOTE_COUNT
 } from '../config';
 
-export const requestScroll = (dispatch, getState) => {
+export const requestScroll = () => (dispatch, getState) => {
   const state = getState().sorting;
 
   dispatch({
@@ -22,12 +23,15 @@ export const requestScroll = (dispatch, getState) => {
       btnState = state.popularAsc;
       break;
     case 'vote_average':
-      btnState = state.voteAsk;
+      btnState = state.voteAsc;
+      break;
+    case 'revenue':
+      btnState = state.revenueAsc;
       break;
   }
 
   const sortDirection = btnState ? 'asc' : 'desc';
-  axios(`${DISCOVER_URL}${API_KEY}&sort_by=${currentSortType}.${sortDirection}&page=${state.nextPage}`)
+  axios(`${DISCOVER_URL}${API_KEY}&sort_by=${currentSortType}.${sortDirection}${VOTE_COUNT}&page=${state.nextPage}`)
   .then(res => {
     dispatch({
       type: 'RECIEVE_SCROLL',
@@ -55,6 +59,11 @@ export const requestSort = (sortType, isFirstRequest) => (dispatch, getState) =>
   let sortDirection;
   const state = getState().sorting;
 
+  if (sortType === false) sortType = state.sortType
+
+  const genres = [];
+  state.genreList.forEach(genre => { if (genre.active) genres.push(genre.id) })
+
   if (isFirstRequest) {
     sortType = state.sortType;
     newBtnState = null;
@@ -68,9 +77,15 @@ export const requestSort = (sortType, isFirstRequest) => (dispatch, getState) =>
         }
         break;
       case 'vote_average':
-        btnState = state.voteAsk;
+        btnState = state.voteAsc;
         newBtnState = {
-          voteAsk: !btnState
+          voteAsc: !btnState
+        }
+        break;
+      case 'revenue':
+        btnState = state.revenueAsc;
+        newBtnState = {
+          revenueAsc: !btnState
         }
         break;
     }
@@ -83,7 +98,14 @@ export const requestSort = (sortType, isFirstRequest) => (dispatch, getState) =>
     newBtnState
   })
 
-  axios(`${DISCOVER_URL}${API_KEY}&sort_by=${sortType}.${sortDirection}&page=1`)
+  let request;
+  if (genres.length > 0) {
+    request = `${DISCOVER_URL}${API_KEY}&sort_by=${sortType}.${sortDirection}${VOTE_COUNT}&with_genres=${genres.join(',')}&page=1`
+  } else {
+    request = `${DISCOVER_URL}${API_KEY}&sort_by=${sortType}.${sortDirection}${VOTE_COUNT}&page=1`
+  }
+
+  axios(request)
   .then(res => {
     dispatch({
       type: 'RECIEVE_SORT',
@@ -123,4 +145,13 @@ export const search = text => dispatch => {
       })
     })
   }
+}
+
+export const editGenre = genre => dispatch => {
+  dispatch({
+    type: 'EDIT_GENRE',
+    genre
+  })
+
+  dispatch(requestSort(false));
 }

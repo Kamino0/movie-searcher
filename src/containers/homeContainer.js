@@ -19,9 +19,9 @@ const mapStateToProps = (state) => ({
   fetchingSearch: state.search.fetching
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  requestScroll: () => dispatch(requestScroll)
-})
+const mapDispatchToProps = {
+  requestScroll
+}
 
 export default connect(
   mapStateToProps,

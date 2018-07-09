@@ -1,5 +1,7 @@
 import React from 'react';
 
+import DropGenres from './dropGenres';
+
 class Search extends React.Component {
 
   componentDidMount() {
@@ -23,23 +25,34 @@ class Search extends React.Component {
   }
 
   voteArrow = () => {
-    const { voteAsk, sortType } = this.props;
+    const { voteAsc, sortType } = this.props;
     if (sortType === 'vote_average') {
-      return voteAsk ? '⇑' : '⇓';
+      return voteAsc ? '⇑' : '⇓';
+    } else {
+      return null
+    }
+  }
+
+  revenueArrow = () => {
+    const { revenueAsc, sortType } = this.props;
+    if (sortType === 'revenue') {
+      return revenueAsc ? '⇑' : '⇓';
     } else {
       return null
     }
   }
 
   render() {
-    const { requestSort } = this.props;
+    const { requestSort, genreList, editGenre } = this.props;
     return (
-      <div className='search'>
-        <div className='search__sort'>
+      <div className='discover'>
+        <div className='discover__sort'>
           <button onClick={() => requestSort('popularity')}>Popular{this.popularArrow()}</button>
           <button onClick={() => requestSort('vote_average')}>Vote{this.voteArrow()}</button>
+          <button onClick={() => requestSort('revenue')}>Revenue{this.revenueArrow()}</button>
+          <DropGenres genreList={genreList} editGenre={editGenre} />
         </div>
-        <input placeholder='Search' type='text' value={this.props.searchText} onChange={this.searchHandler}/>
+        <input className='discover__search' placeholder='Search' type='text' value={this.props.searchText} onChange={this.searchHandler}/>
       </div>
     )
   }
