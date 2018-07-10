@@ -1,26 +1,37 @@
 import { connect } from 'react-redux';
 
-import { requestScroll } from '../actions';
+import { requestSort, search } from '../actions';
 import Home from '../components/home';
+
+let movies, asMovies;
 
 const wat = (state) => {
   if(state.search.searchText !== '') {
-    return state.search.movies
+    movies = state.search.movies,
+    asMovies = 'search'
   } else {
-    return state.sorting.movies
+    movies = state.sorting.movies,
+    asMovies = 'sorting'
   }
 }
 
-const mapStateToProps = (state) => ({
-  movies: wat(state),
-  scrolling: state.sorting.scrolling,
-  fetching: state.sorting.fetching,
-  fetchingScroll: state.sorting.fetchingScroll,
-  fetchingSearch: state.search.fetching
-});
+const mapStateToProps = (state) => {
+
+  wat(state);
+
+  return {
+    movies,
+    asMovies,
+    scrolling: state.sorting.scrolling,
+    fetching: state.sorting.fetching,
+    fetchingScroll: state.sorting.fetchingScroll,
+    fetchingSearch: state.search.fetching
+  }
+};
 
 const mapDispatchToProps = {
-  requestScroll
+  requestSort,
+  search
 }
 
 export default connect(

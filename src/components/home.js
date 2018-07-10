@@ -15,11 +15,12 @@ class Home extends React.Component {
   }
 
   handleScroll = () => {
-    const { scrolling } = this.props;
+    const { scrolling, asMovies } = this.props;
     const pageOffset = window.pageYOffset + window.innerHeight;
     const pageHeight = document.body.clientHeight;
-    if (pageOffset === pageHeight && !scrolling) {
-      this.props.requestScroll()
+    if (pageOffset === pageHeight) {
+      if (asMovies === 'sorting' && !scrolling) this.props.requestSort(true)
+      else if (asMovies === 'search') this.props.search(true)
     }
   }
 
