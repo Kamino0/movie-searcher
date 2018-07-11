@@ -2,21 +2,31 @@ const initialSearch = {
   searchText: '',
   movies: [],
   fetching: false,
-  nextPage: 2
+  fetchingScroll: false,
+  nextPage: 2,
+  endScrolling: false
 }
 const search = (state = initialSearch, action) => {
   switch (action.type) {
     case 'REQUEST_SEARCH':
-      return {
-        ...state,
-        // fetching: true
+      if (action.isScrolling) {
+        return {
+          ...state,
+          fetchingScroll: true
+        }
+      } else {
+        return {
+          ...state,
+          fetching: true,
+          endScrolling: false
+        }
       }
     case 'RECIEVE_SEARCH':
       if (action.isScrolling) {
         return {
           ...state,
           movies: [...state.movies, ...action.movies],
-          // fetchingScroll: false,
+          fetchingScroll: false,
           nextPage: state.nextPage + 1,
           endScrolling: action.endScrolling
         }

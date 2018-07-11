@@ -42,8 +42,9 @@ body {
 }
 
 .main-content {
-  max-width: 1010px;
+  max-width: 1600px;
   margin: 0 auto;
+  padding: 0 10px;
 }
 
 
@@ -52,7 +53,9 @@ body {
 .discover {
   display: flex;
   justify-content: flex-end;
+  max-width: 1010px;
   padding: 0 10px;
+  margin: 0 auto;
   margin-bottom: 20px;
 }
 
@@ -93,18 +96,73 @@ body {
     color: #51707F;
   }
 
-  .drop-genres {
-    position: relative;
-    width: 120px;
-    height: 35px;
+
+
+
+
+
+.main-content__row {
+  display: flex;
+  align-items: flex-start;
+}
+
+  .genre-filter {
+    width: calc( (100% - 1010px) / 2);
+    text-transform: uppercase;
+    border-left: 7px solid;
   }
 
-    .drop-genres ul {
-      margin: 0;
-      padding: 0;
-      background-color: #fff;
-      list-style: none;
-    }
+  .genre-filter__title {
+    display: block;
+    font-size: 22px;
+    margin-left: 20px;
+    margin-bottom: 16px;
+  }
+
+  .genre-filter ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .genre-filter li:hover {
+    background: #ccc;
+  }
+
+  .genre-filter input {
+    display: none;
+  }
+
+  .genre-filter label {
+    position: relative;
+    padding: 5px 0;
+    padding-left: 40px;
+    display: block;
+    cursor: pointer;
+  }
+
+  .genre-filter input + label::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 13px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #50708087
+  }
+
+  .genre-filter input:checked + label::after {
+    content: '';
+    position: absolute;
+    top: 11px;
+    left: 18px;
+    width: 6px;
+    height: 6px;
+    background-color: #537383;
+  }
+
+
+
 
 
 
@@ -112,12 +170,12 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 1010px;
 }
 
 .movie-card {
   display: flex;
-  margin: 10px;
-  margin-bottom: 20px;
+  margin: 0 10px 20px 10px;
   box-shadow: 0 0 1px 0px #51707F;
   transition: .2s all;
 }
@@ -149,6 +207,8 @@ body {
 
 .movie-details {
   display: flex;
+  max-width: 1010px;
+  margin: 0 auto;
   margin-bottom: 90px;
   box-shadow: 0 0 1px 0px #51707F;
 }
@@ -182,6 +242,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  max-width: 1010px;
+  margin: 0 auto;
 }
 
 .recommendations__movie {

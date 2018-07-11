@@ -3,6 +3,7 @@ import React from 'react';
 import SearchContainer from '../containers/searchContainer';
 import MovieCard from './movieCard';
 import Placeholder from './placeholder';
+import GenreFilter from './genreFilter';
 
 class Home extends React.Component {
 
@@ -15,29 +16,31 @@ class Home extends React.Component {
   }
 
   handleScroll = () => {
-    const { scrolling, asMovies } = this.props;
+    const { asMovies, fetching, fetchingScroll } = this.props;
     const pageOffset = window.pageYOffset + window.innerHeight;
     const pageHeight = document.body.clientHeight;
-    if (pageOffset === pageHeight) {
-      if (asMovies === 'sorting' && !scrolling) this.props.requestSort(true)
+    if (pageOffset >= pageHeight - 100 && (!fetching || !fetchingScroll)) {
+      if (asMovies === 'sorting') this.props.requestSort(true)
       else if (asMovies === 'search') this.props.search(true)
     }
   }
 
   render = () => {
-    const { movies, fetching, fetchingScroll, fetchingSearch } = this.props;
+    const { movies, fetching, fetchingScroll, genreList, editGenre } = this.props;
+    console.log(fetching)
     return (
       <div>
         <SearchContainer />
-        {
-          fetching || fetchingSearch ? <Placeholder /> :
-          <div className='movie-cards'>
-            { movies.map((movie, i) => <MovieCard key={i} movie={movie} />) }
-          </div>
-        }
-        {
-          fetchingScroll && <Placeholder />
-        }
+        <div className='main-content__row'>
+          <GenreFilter genreList={genreList} editGenre={editGenre} />
+            <div className='movie-cards'>
+              {
+              fetching ? <Placeholder /> :
+              movies.map((movie, i) => <MovieCard key={i} movie={movie} />)
+              }
+              {fetchingScroll && <Placeholder />}
+            </div>
+        </div>
       </div>
     )
   }

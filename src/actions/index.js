@@ -88,8 +88,6 @@ export const requestSort = (isScrolling) => (dispatch, getState) => {
   })
 }
 
-
-
 export const requestRecomendations = id => dispatch => {
   dispatch({
     type: 'REQUEST_RECOMMENDATIONS'
@@ -106,7 +104,7 @@ export const requestRecomendations = id => dispatch => {
 export const search = (isScrolling) => (dispatch, getState) => {
   dispatch({
     type: 'REQUEST_SEARCH',
-    text
+    isScrolling
   })
 
   const state = getState();
@@ -121,7 +119,6 @@ export const search = (isScrolling) => (dispatch, getState) => {
     const nextPage = isScrolling ? state.search.nextPage : 1;
     axios(`${SEARCH_URL}${API_KEY}&query=${text}&page=${nextPage}`)
     .then(res => {
-      console.log(res.data.results)
       dispatch({
         type: 'RECIEVE_SEARCH',
         movies: res.data.results,

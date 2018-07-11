@@ -4,7 +4,6 @@ const initialSort = {
   sortType: 'popularity',
   movies: [],
   nextPage: 2,
-  scrolling: false,
   fetching: false,
   fetchingScroll: false,
   endScrolling: false,

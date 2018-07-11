@@ -6,7 +6,7 @@ SEARCH_URL = 'https://api.themoviedb.org/3/search/movie',
 IMG_W185_URL = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2',
 IMG_W342_URL = 'https://image.tmdb.org/t/p/w342',
 IMG_W154_URL = 'https://image.tmdb.org/t/p/w154',
-VOTE_COUNT = '&vote_count.gte=2000';
+VOTE_COUNT = '&vote_count.gte=200';
 
 export const genres = [
   {

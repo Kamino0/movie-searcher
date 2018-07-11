@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { requestSort, editGenre, editButton, editSearchText } from '../actions';
+import { requestSort, editButton, editSearchText } from '../actions';
 
 import Search from '../components/search';
 
@@ -9,13 +9,11 @@ const mapStateToProps = (state) => ({
   popularAsc: state.sorting.buttons.popularAsc,
   voteAsc: state.sorting.buttons.voteAsc,
   revenueAsc: state.sorting.buttons.revenueAsc,
-  sortType: state.sorting.sortType,
-  genreList: state.sorting.genreList
+  sortType: state.sorting.sortType
 })
 
 const mapDispatchToProps = {
   requestSort,
-  editGenre,
   editButton,
   editSearchText
 }
