@@ -1,6 +1,7 @@
 # Movie-searcher
 
 * React
+* React-router-dom
 * Redux
 * Redux-thunk
 * Axios, https://www.themoviedb.org/documentation/api
